@@ -1,0 +1,6 @@
+{
+  "name": "Desafio Seca em 30 Dias",
+  "description": "Página oficial de vendas do Desafio Seca em 30 Dias: reprogramação metabólica em 4 fases, cardápio completo, shots e 4 bônus inclusos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

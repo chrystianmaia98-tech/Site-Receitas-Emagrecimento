@@ -1,7 +1,16 @@
-import { Star, CheckCircle, Quote, TrendingDown, Award } from "lucide-react";
+import { useState } from "react";
+import { Star, CheckCircle, Quote, TrendingDown, Award, Sparkles, ChevronLeft, ChevronRight, Lock } from "lucide-react";
 import { TESTIMONIALS } from "../data/productData";
+import transformationPhotoWebp from "../assets/transformation-proof.webp";
+import transformationPhotoJpg from "../assets/transformation-proof.jpg";
+import transformationMalePhoto from "../assets/transformation-proof-male.jpg";
 
 export function TestimonialsSection() {
+  const [caseIndex, setCaseIndex] = useState<0 | 1>(0);
+
+  const nextCase = () => setCaseIndex((prev) => (prev === 0 ? 1 : 0));
+  const prevCase = () => setCaseIndex((prev) => (prev === 1 ? 0 : 1));
+
   return (
     <section id="testimonials-section" className="py-16 sm:py-24 bg-[#FAF8F5] border-b border-[#E8E1D5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,6 +26,166 @@ export function TestimonialsSection() {
           <p className="text-base sm:text-lg text-[#55645E] mt-3 leading-relaxed">
             Mulheres e homens reais que abandonaram o efeito sanfona seguindo a reprogramação metabólica de 4 fases.
           </p>
+        </div>
+
+        {/* Featured Real Transformation Case Study with the official image */}
+        <div className="bg-[#141A17] text-white rounded-3xl p-6 sm:p-8 border border-[#2B3B32] shadow-xl mb-16 overflow-hidden">
+          
+          {/* Top Carousel Navigation Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 mb-6 border-b border-[#23352B]">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#22C55E] animate-pulse" />
+              <span className="text-xs font-bold uppercase tracking-wider text-[#A5CDB9]">
+                {caseIndex === 0 ? "Transformação Caso 1: Aluna (Feminino)" : "Transformação Caso 2: Aluno (Masculino)"}
+              </span>
+            </div>
+
+            {/* Side Navigation Buttons ("Ir pro lado") */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={prevCase}
+                className="px-3 py-1.5 rounded-xl bg-[#1C2C23] hover:bg-[#284033] text-white flex items-center gap-1 text-xs font-bold border border-[#2E4A3B] transition-colors cursor-pointer"
+                title="Caso anterior"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                <span>Anterior</span>
+              </button>
+              <span className="text-xs font-extrabold text-[#4ADE80] px-1">
+                {caseIndex + 1} / 2
+              </span>
+              <button
+                onClick={nextCase}
+                className="px-3 py-1.5 rounded-xl bg-[#22C55E] hover:bg-[#1EAE53] text-white flex items-center gap-1 text-xs font-bold border border-[#33BD68] transition-colors cursor-pointer shadow-sm"
+                title="Próximo caso (ir para o lado)"
+              >
+                <span>Próximo</span>
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Image Showcase */}
+            <div className="lg:col-span-6 flex justify-center relative">
+              <div className="relative rounded-2xl overflow-hidden border border-[#2D3F35] shadow-2xl bg-black/60 max-w-[460px] w-full group">
+                
+                {/* Side Buttons overlaying the image */}
+                <button
+                  onClick={prevCase}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/75 hover:bg-[#22C55E] text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer shadow-lg"
+                  title="Voltar para o caso anterior"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+
+                <button
+                  onClick={nextCase}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-black/75 hover:bg-[#22C55E] text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer shadow-lg"
+                  title="Avançar para o próximo caso"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+
+                {caseIndex === 0 ? (
+                  <img
+                    src={transformationPhotoWebp}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = transformationPhotoJpg;
+                    }}
+                    alt="Resultado Oficial: 30 Dias de Dieta + Treino - Aluna"
+                    className="w-full h-auto object-contain rounded-2xl"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <img
+                    src={transformationMalePhoto}
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "/transformation-proof-male.jpg";
+                    }}
+                    alt="Resultado Oficial: 30 Dias de Dieta + Treino - Aluno"
+                    className="w-full h-auto object-contain rounded-2xl"
+                    referrerPolicy="no-referrer"
+                  />
+                )}
+
+                <div className="absolute top-3 left-3 bg-black/85 backdrop-blur-xs px-3 py-1 rounded-full text-[11px] font-bold text-[#4ADE80] border border-[#2B4B38] flex items-center gap-1.5 shadow-md">
+                  <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
+                  <span>{caseIndex === 0 ? "Aluna: Caso Real Auditado" : "Aluno: Caso Real Auditado"}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Story & Pillars */}
+            <div className="lg:col-span-6 space-y-5">
+              <div>
+                <div className="inline-flex items-center gap-1.5 bg-[#1B2B22] text-[#4ADE80] px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 border border-[#2A4837]">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Evolução Comprovada em 30 Dias</span>
+                </div>
+                <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-tight">
+                  {caseIndex === 0 
+                    ? "Aluna (Feminino): Desinchaço Total e -4,8 kg em 30 Dias"
+                    : "Aluno (Masculino): Perda de Gordura Visceral e Definição Muscular"}
+                </h3>
+                <p className="text-sm text-[#A2B6AC] mt-2 leading-relaxed">
+                  Veja a transformação corporal obtida através da reprogramação metabólica progressiva de 4 fases, combinando deficit calórico inteligente e treinos diários de 15 minutos:
+                </p>
+              </div>
+
+              {/* Comparison Bullets */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="bg-black/50 border border-rose-500/30 rounded-xl p-3.5">
+                  <div className="text-xs font-bold text-[#FF8A80] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-rose-500" />
+                    <span>Dia 1 (Antes):</span>
+                  </div>
+                  <ul className="text-xs text-[#CBD5E1] space-y-1.5">
+                    <li className="flex items-center gap-1.5 text-rose-300">
+                      <span className="text-rose-500 font-bold">✕</span> Barriga mais aparente
+                    </li>
+                    <li className="flex items-center gap-1.5 text-rose-300">
+                      <span className="text-rose-500 font-bold">✕</span> Menor definição muscular
+                    </li>
+                    <li className="flex items-center gap-1.5 text-rose-300">
+                      <span className="text-rose-500 font-bold">✕</span> Menos disposição diária
+                    </li>
+                    <li className="flex items-center gap-1.5 text-rose-300">
+                      <span className="text-rose-500 font-bold">✕</span> Autoestima mais baixa
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="bg-black/50 border border-[#22C55E]/35 rounded-xl p-3.5">
+                  <div className="text-xs font-bold text-[#4ADE80] uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
+                    <span>Dia 30 (Depois):</span>
+                  </div>
+                  <ul className="text-xs text-[#E2E8F0] space-y-1.5">
+                    <li className="flex items-center gap-1.5 text-emerald-300">
+                      <span className="text-[#4ADE80] font-bold">✓</span> Cintura visivelmente mais fina
+                    </li>
+                    <li className="flex items-center gap-1.5 text-emerald-300">
+                      <span className="text-[#4ADE80] font-bold">✓</span> Mais definição muscular
+                    </li>
+                    <li className="flex items-center gap-1.5 text-emerald-300">
+                      <span className="text-[#4ADE80] font-bold">✓</span> Mais energia no dia a dia
+                    </li>
+                    <li className="flex items-center gap-1.5 text-emerald-300">
+                      <span className="text-[#4ADE80] font-bold">✓</span> Autoestima nas alturas
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Pillars Badges */}
+              <div className="border-t border-[#25372E] pt-3 flex flex-wrap gap-2 text-[11px] text-[#A2B5AB]">
+                <span className="bg-[#17251E] border border-[#254030] px-3 py-1 rounded-lg">🍽️ Alimentação Controlada</span>
+                <span className="bg-[#17251E] border border-[#254030] px-3 py-1 rounded-lg">🏋️ Treino Regular (15 min)</span>
+                <span className="bg-[#17251E] border border-[#254030] px-3 py-1 rounded-lg">💧 Água (2,5L a 3L/dia)</span>
+                <span className="bg-[#17251E] border border-[#254030] px-3 py-1 rounded-lg">😴 Sono Reparador (7-8h)</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Testimonials Grid */}

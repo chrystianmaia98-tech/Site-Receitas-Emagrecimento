@@ -125,15 +125,14 @@ export function HeroSection({ onCtaClick, onExploreClick }: HeroSectionProps) {
 
           </div>
 
-          {/* Right Column: Visual Product Representation (Ebook Mockup + Pillars) */}
-          <div className="lg:col-span-5 flex justify-center relative">
+          {/* Right Column: Visual Product Representation (Photo + Ebook Toggle) */}
+          <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
             
             {/* Background Glow */}
             <div className="absolute -inset-4 bg-[#244B41]/10 rounded-3xl filter blur-2xl -z-10" />
 
-            {/* Realistic Digital Guide Card (Styled precisely after the delivered PDF cover) */}
+            {/* Digital Guide Card Mockup - Exact original look */}
             <div className="w-full max-w-[360px] sm:max-w-[400px] bg-[#FAF7F2] rounded-2xl p-5 sm:p-7 border border-[#E0D8C8] shadow-2xl relative transition-transform hover:-translate-y-1 duration-300">
-              
               {/* Header inside cover */}
               <div className="flex justify-between items-start border-b border-[#E3DCD0] pb-4 mb-5">
                 <div>
@@ -146,7 +145,6 @@ export function HeroSection({ onCtaClick, onExploreClick }: HeroSectionProps) {
                   </div>
                 </div>
 
-                {/* Botanical leaf graphic element mimicking page 1 */}
                 <div className="w-14 h-14 relative flex items-center justify-center">
                   <div className="w-10 h-10 rounded-full bg-[#EAE2D2] border border-[#DDD3C0] flex items-center justify-center">
                     <div className="w-6 h-6 rounded-tl-2xl rounded-br-2xl bg-[#2A5C4E] rotate-45 transform" />
@@ -155,7 +153,6 @@ export function HeroSection({ onCtaClick, onExploreClick }: HeroSectionProps) {
                 </div>
               </div>
 
-              {/* Sub-text inside cover */}
               <p className="text-xs text-[#5D6B64] italic leading-relaxed mb-5">
                 Reprogramação metabólica em 4 fases — densidade nutricional, controle de insulina e eliminação de toxinas, sem passar fome.
               </p>
@@ -210,7 +207,6 @@ export function HeroSection({ onCtaClick, onExploreClick }: HeroSectionProps) {
                 </span>
               </div>
 
-              {/* Floating Guarantee Badge Tag */}
               <div className="absolute -top-3 -right-3 bg-[#C85A32] text-white px-3 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1 animate-pulse">
                 <span>DOWNLOAD IMEDIATO</span>
               </div>

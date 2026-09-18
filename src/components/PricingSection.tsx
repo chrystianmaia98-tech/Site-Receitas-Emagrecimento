@@ -1,4 +1,4 @@
-import { Check, ShieldCheck, Zap, Lock, CreditCard, Sparkles, ArrowRight } from "lucide-react";
+import { Check, ShieldCheck, Zap, Lock, QrCode, Sparkles, ArrowRight } from "lucide-react";
 import { TransformationProofCard } from "./TransformationProofCard";
 
 interface PricingSectionProps {
@@ -66,19 +66,20 @@ export function PricingSection({ onOpenCheckout }: PricingSectionProps) {
                     De R$ 197,00 por apenas:
                   </div>
                   
-                  <div className="flex items-baseline justify-center gap-1 mt-1">
-                    <span className="text-lg font-bold text-[#1F2C25]">2x de</span>
+                  <div className="flex items-baseline justify-center gap-2 mt-1">
+                    <span className="text-xs uppercase tracking-wider text-[#7A8A83] font-bold">Por apenas</span>
                     <span className="font-serif text-5xl sm:text-6xl font-extrabold text-[#244B41] tracking-tight">
-                      R$ 10,40
+                      R$ 19,90
                     </span>
                   </div>
 
-                  <div className="text-xs sm:text-sm font-semibold text-[#1F2D26] mt-1">
-                    ou <strong className="text-base text-[#C85A32]">R$ 19,90 à vista</strong> no PIX ou Cartão
+                  <div className="text-sm font-bold text-[#C85A32] mt-1.5 flex items-center justify-center gap-1.5">
+                    <Zap className="w-4 h-4 fill-current text-[#C85A32]" />
+                    <span>Pagamento único exclusivo via PIX</span>
                   </div>
 
                   <div className="text-[11px] text-[#7E8E87] mt-1">
-                    Pagamento único · Sem mensalidades recorrentes
+                    Liberação imediata no seu e-mail e WhatsApp · Sem mensalidades
                   </div>
                 </div>
 
@@ -167,8 +168,8 @@ export function PricingSection({ onOpenCheckout }: PricingSectionProps) {
                       Ambiente 100% Criptografado
                     </span>
                     <span className="flex items-center gap-1">
-                      <CreditCard className="w-3.5 h-3.5 text-[#2E7D59]" />
-                      PIX & Cartões
+                      <QrCode className="w-3.5 h-3.5 text-[#2E7D59]" />
+                      Pagamento Seguro via PIX
                     </span>
                   </div>
 

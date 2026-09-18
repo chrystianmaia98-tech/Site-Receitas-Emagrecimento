@@ -13,19 +13,36 @@ import { BottomOfferCta } from "./components/BottomOfferCta";
 import { GuaranteeSection } from "./components/GuaranteeSection";
 import { FaqSection } from "./components/FaqSection";
 import { Footer } from "./components/Footer";
-import { CheckoutModal } from "./components/CheckoutModal";
 import { ExitIntentModal } from "./components/ExitIntentModal";
-import { ArrowUp, Sparkles, ShoppingBag, Flame } from "lucide-react";
+import { ArrowUp, Sparkles, ShoppingBag } from "lucide-react";
+
+export const CHECKOUT_URL_1990 = "https://pay.lowify.com.br/checkout?product_id=bbysng";
+export const CHECKOUT_URL_1490 = "https://pay.lowify.com.br/go.php?offer=069a8da2";
+
+export function redirectToCheckout(url: string) {
+  try {
+    if (window.self !== window.top) {
+      try {
+        if (window.top) {
+          window.top.location.href = url;
+          return;
+        }
+      } catch {
+        window.open(url, "_blank", "noopener,noreferrer");
+        return;
+      }
+    }
+  } catch {
+    // ignore
+  }
+  window.location.href = url;
+}
 
 export default function App() {
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [isExitModalOpen, setIsExitModalOpen] = useState(false);
-  const [checkoutPrice, setCheckoutPrice] = useState(19.90);
   const [showStickyBar, setShowStickyBar] = useState(false);
   
   const hasTriggeredExitRef = useRef(false);
-  const checkoutOpenRef = useRef(isCheckoutOpen);
-  checkoutOpenRef.current = isCheckoutOpen;
 
   // Scroll listener for sticky footer
   useEffect(() => {
@@ -48,16 +65,16 @@ export default function App() {
       // Seed a history entry so going back triggers popstate instead of immediately leaving
       try {
         window.history.pushState({ page: "landing" }, "", window.location.href);
-      } catch (e) {
+      } catch {
         // Safe fallback
       }
 
-      const handlePopState = (e: PopStateEvent) => {
-        if (!hasTriggeredExitRef.current && !checkoutOpenRef.current) {
+      const handlePopState = () => {
+        if (!hasTriggeredExitRef.current) {
           // Keep user on the page and open the 14,90 offer
           try {
             window.history.pushState({ page: "exit-offer" }, "", window.location.href);
-          } catch (err) {
+          } catch {
             // ignore
           }
           setIsExitModalOpen(true);
@@ -69,7 +86,7 @@ export default function App() {
 
       // 2. Desktop Mouse Leave (Cursor moving to close tab/window)
       const handleMouseLeave = (e: MouseEvent) => {
-        if (e.clientY <= 8 && !hasTriggeredExitRef.current && !checkoutOpenRef.current) {
+        if (e.clientY <= 8 && !hasTriggeredExitRef.current) {
           setIsExitModalOpen(true);
           hasTriggeredExitRef.current = true;
         }
@@ -77,10 +94,9 @@ export default function App() {
 
       document.addEventListener("mouseleave", handleMouseLeave);
 
-      // 3. Mobile rapid scroll to top or tab switch
+      // 3. Mobile tab switch
       const handleVisibilityChange = () => {
-        if (document.visibilityState === "hidden" && !hasTriggeredExitRef.current && !checkoutOpenRef.current) {
-          // When user switches apps or tries to close tab on mobile
+        if (document.visibilityState === "hidden" && !hasTriggeredExitRef.current) {
           setIsExitModalOpen(true);
           hasTriggeredExitRef.current = true;
         }
@@ -104,24 +120,12 @@ export default function App() {
   };
 
   const handleOpenCheckout = () => {
-    setIsCheckoutOpen(true);
-  };
-
-  const handleCloseCheckout = () => {
-    setIsCheckoutOpen(false);
-    // If user closed the checkout without buying and hasn't seen the 14,90 downsell yet:
-    if (!hasTriggeredExitRef.current && checkoutPrice > 15) {
-      setTimeout(() => {
-        setIsExitModalOpen(true);
-        hasTriggeredExitRef.current = true;
-      }, 350);
-    }
+    redirectToCheckout(CHECKOUT_URL_1990);
   };
 
   const handleClaimExitDiscount = () => {
-    setCheckoutPrice(14.90);
     setIsExitModalOpen(false);
-    setIsCheckoutOpen(true);
+    redirectToCheckout(CHECKOUT_URL_1490);
   };
 
   return (
@@ -181,13 +185,6 @@ export default function App() {
         onClaimDiscount={handleClaimExitDiscount}
       />
 
-      {/* 16. Interactive Checkout Modal */}
-      <CheckoutModal
-        isOpen={isCheckoutOpen}
-        onClose={handleCloseCheckout}
-        price={checkoutPrice}
-      />
-
       {/* Floating Bottom Sticky Bar for High Conversion (Mobile & Desktop) */}
       {showStickyBar && (
         <div className="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-[#DFD6C7] p-3 sm:py-3.5 z-40 shadow-2xl transition-all animate-fade-in">
@@ -196,16 +193,11 @@ export default function App() {
               <div className="font-serif font-bold text-sm text-[#1B2822] flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#C85A32]" />
                 <span>Desafio Seca em 30 Dias + 4 Bônus Gratuitos</span>
-                {checkoutPrice <= 15 && (
-                  <span className="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold uppercase animate-pulse">
-                    Preço Especial R$ 14,90
-                  </span>
-                )}
               </div>
               <div className="text-xs text-[#5D6C65]">
                 De <span className="line-through">R$ 197</span> por apenas{" "}
                 <strong className="text-[#244B41]">
-                  R$ {checkoutPrice.toFixed(2).replace(".", ",")}
+                  R$ 19,90 no PIX
                 </strong>
               </div>
             </div>
@@ -213,12 +205,9 @@ export default function App() {
             <div className="sm:hidden text-left">
               <div className="text-xs font-serif font-bold text-[#1B2822] flex items-center gap-1">
                 <span>Desafio Seca 30 Dias</span>
-                {checkoutPrice <= 15 && (
-                  <Flame className="w-3.5 h-3.5 text-[#C85A32]" />
-                )}
               </div>
               <div className="text-xs font-extrabold text-[#244B41]">
-                R$ {checkoutPrice.toFixed(2).replace(".", ",")} à vista
+                R$ 19,90 no PIX
               </div>
             </div>
 

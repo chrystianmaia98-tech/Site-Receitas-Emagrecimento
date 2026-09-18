@@ -49,7 +49,7 @@ export function BottomOfferCta({ onOpenCheckout }: BottomOfferCtaProps) {
               R$ 19,90
             </div>
             <div className="text-xs text-[#B4CAC0] mb-4">
-              ou 2x de <strong className="text-white">R$ 10,40</strong>
+              Pagamento único via <strong className="text-[#4ADE80]">PIX</strong> · Acesso Imediato
             </div>
 
             <button

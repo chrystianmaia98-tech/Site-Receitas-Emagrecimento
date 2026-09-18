@@ -101,7 +101,7 @@ export function BonusesSection({ onCtaClick }: BonusesSectionProps) {
               Economia Total Confirmada
             </div>
             <div className="font-serif text-2xl sm:text-3xl font-bold text-white">
-              Guia Completo + 4 Bônus = Apenas R$ 19,90
+              Guia Completo + 4 Bônus = Apenas R$ 19,90 no PIX
             </div>
             <p className="text-xs sm:text-sm text-[#D1E6DC]">
               Tudo o que você precisa para os próximos 30 dias na palma da sua mão.

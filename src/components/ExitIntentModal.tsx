@@ -93,12 +93,12 @@ export function ExitIntentModal({ isOpen, onClose, onClaimDiscount }: ExitIntent
               </span>
             </div>
 
-            <div className="text-xs sm:text-sm text-[#E2EFEB] font-medium mt-1">
-              ou <strong className="text-white">2x de R$ 7,80</strong> no cartão de crédito
+            <div className="text-xs sm:text-sm text-[#4ADE80] font-bold mt-1">
+              Pagamento único via PIX
             </div>
 
             <div className="text-[11px] text-[#869E92] mt-1">
-              Pagamento único via PIX ou Cartão · Sem mensalidades
+              Liberação imediata no seu e-mail e WhatsApp · Sem mensalidades
             </div>
           </div>
 

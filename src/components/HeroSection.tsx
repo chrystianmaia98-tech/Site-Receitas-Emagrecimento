@@ -87,8 +87,8 @@ export function HeroSection({ onCtaClick, onExploreClick }: HeroSectionProps) {
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-5 gap-y-2 text-xs text-[#526059]">
                 <div className="flex items-center gap-1.5 font-medium text-[#1E3028]">
                   <span className="text-[#C85A32] line-through">De R$ 197</span>
-                  <span className="bg-[#244B41]/10 text-[#244B41] px-2 py-0.5 rounded font-bold text-sm">
-                    Por apenas R$ 19,90
+                  <span className="bg-[#244B41]/10 text-[#244B41] px-2.5 py-0.5 rounded font-bold text-sm">
+                    Por apenas R$ 19,90 no PIX
                   </span>
                 </div>
                 <div className="flex items-center gap-1">

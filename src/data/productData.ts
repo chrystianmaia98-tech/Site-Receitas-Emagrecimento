@@ -270,6 +270,10 @@ export const FAQ_ITEMS: FaqItem[] = [
     answer: "Não. O método foi feito para o dia a dia de pessoas reais. Você usará ingredientes simples encontrados em qualquer supermercado ou feira de bairro, como ovos, frango, legumes, aveia, limão e temperos comuns."
   },
   {
+    question: "Quais são as formas de pagamento disponíveis?",
+    answer: "O pagamento é realizado de forma 100% segura e à vista exclusivamente via PIX por apenas R$ 19,90 (sem mensalidades ou taxas escondidas). Com o PIX, sua confirmação é em tempo real e seu material é liberado na hora."
+  },
+  {
     question: "E se eu não gostar ou não conseguir resultados?",
     answer: "Você tem 7 dias de Garantia Incondicional. Se por qualquer motivo achar que o desafio não é para você, basta pedir seu dinheiro de volta que reembolsaremos 100% do valor pago, sem complicação."
   }
